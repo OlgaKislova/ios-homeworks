@@ -26,7 +26,12 @@ class FeedViewController: UIViewController {
     
     @objc
     func postButtonAction() {
-        self.navigationController?.pushViewController(PostViewController(), animated: false)
+        let post = Post(title: "Новый год", message: "С праздником чудес и исполнения желаний – с Новым годом!")
+        let vc = PostViewController()
+        
+        vc.post = post
+        
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     private func createPostButton() -> UIButton {

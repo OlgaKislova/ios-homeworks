@@ -15,6 +15,8 @@
 		63F1BD902952EF1000E78844 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1BD8F2952EF1000E78844 /* FeedViewController.swift */; };
 		63F1BD922952EF4700E78844 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1BD912952EF4700E78844 /* ProfileViewController.swift */; };
 		63F1BD942952F0C600E78844 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1BD932952F0C600E78844 /* PostViewController.swift */; };
+		63F1BD962953124D00E78844 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1BD952953124D00E78844 /* PostModel.swift */; };
+		63F1BD982953153900E78844 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1BD972953153900E78844 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		63F1BD8F2952EF1000E78844 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		63F1BD912952EF4700E78844 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		63F1BD932952F0C600E78844 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		63F1BD952953124D00E78844 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		63F1BD972953153900E78844 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				63F1BD8F2952EF1000E78844 /* FeedViewController.swift */,
 				63F1BD912952EF4700E78844 /* ProfileViewController.swift */,
 				63F1BD932952F0C600E78844 /* PostViewController.swift */,
+				63F1BD972953153900E78844 /* InfoViewController.swift */,
+				63F1BD952953124D00E78844 /* PostModel.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -146,8 +152,10 @@
 				63F1BD942952F0C600E78844 /* PostViewController.swift in Sources */,
 				63F1BD802952DC9D00E78844 /* ViewController.swift in Sources */,
 				63F1BD7C2952DC9D00E78844 /* AppDelegate.swift in Sources */,
+				63F1BD962953124D00E78844 /* PostModel.swift in Sources */,
 				63F1BD922952EF4700E78844 /* ProfileViewController.swift in Sources */,
 				63F1BD902952EF1000E78844 /* FeedViewController.swift in Sources */,
+				63F1BD982953153900E78844 /* InfoViewController.swift in Sources */,
 				63F1BD7E2952DC9D00E78844 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
