@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let userFeedNC = UINavigationController(rootViewController: FeedViewController())
         userFeedNC.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "list.bullet.rectangle"), tag: 1)
-    
+        
         let profileNC = UINavigationController(rootViewController: ProfileViewController())
         profileNC.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 2)
         
