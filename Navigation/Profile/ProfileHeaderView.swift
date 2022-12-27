@@ -11,6 +11,7 @@ class ProfileHeaderView: UIView {
     private let avatarIView = AvatarImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     private let titleLView = TitleLabelView(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
     private let subTitleLView = SubTitleLabelView(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
+    private let statusButtonLView = StatusButtonView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
     
     private var navigationBarHeight: CGFloat { self.safeAreaInsets.top }
     
@@ -18,10 +19,18 @@ class ProfileHeaderView: UIView {
         configure()
     }
     
+    @objc
+    func showStatus() {
+        print(self.subTitleLView.text ?? "")
+    }
+    
     public func configure() {
         self.addSubview(avatarIView)
         self.addSubview(titleLView)
         self.addSubview(subTitleLView)
+        self.addSubview(statusButtonLView)
+        
+        statusButtonLView.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
     }
 
     public func recalculationPosition() {
@@ -35,15 +44,22 @@ class ProfileHeaderView: UIView {
         titleLView.frame = CGRect(
             x: avatarIView.frame.maxX + 16,
             y: navigationBarHeight + 27,
-            width: titleLView.frame.width,
+            width: self.frame.width - avatarIView.frame.maxX - 32,
             height: titleLView.frame.height
         )
         
         subTitleLView.frame = CGRect(
             x: avatarIView.frame.maxX + 16,
             y: avatarIView.frame.maxY - 36,
-            width: subTitleLView.frame.width,
+            width: self.frame.width - avatarIView.frame.maxX - 32,
             height: subTitleLView.frame.height
+        )
+        
+        statusButtonLView.frame = CGRect(
+            x: 16,
+            y: avatarIView.frame.maxY + 16,
+            width: self.frame.width - 32,
+            height: 50
         )
     }
 }
