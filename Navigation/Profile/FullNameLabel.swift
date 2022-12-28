@@ -1,13 +1,13 @@
 //
-//  TitleLabelView.swift
+//  FullNameLabel.swift
 //  Navigation
 //
-//  Created by Kislov Vadim on 27.12.2022.
+//  Created by Kislova Olga on 27.12.2022.
 //
 
 import UIKit
 
-class TitleLabelView: UILabel {
+class FullNameLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
     

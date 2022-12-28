@@ -2,16 +2,16 @@
 //  ProfileHeaderView.swift
 //  Navigation
 //
-//  Created by Kislov Vadim on 25.12.2022.
+//  Created by Kislova Olga on 25.12.2022.
 //
 
 import UIKit
 
 class ProfileHeaderView: UIView {
     private let avatarIView = AvatarImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    private let titleLView = TitleLabelView(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
-    private let subTitleLView = SubTitleLabelView(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
-    private let statusButtonLView = StatusButtonView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+    private let titleLView = FullNameLabel(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
+    private let subTitleLView = StatusLabel(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
+    private let statusButtonLView = SetStatusButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
     
     private var navigationBarHeight: CGFloat { self.safeAreaInsets.top }
     

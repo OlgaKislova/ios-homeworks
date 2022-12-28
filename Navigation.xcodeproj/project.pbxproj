@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		631B4526295B7814005BED7F /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B4525295B7814005BED7F /* AvatarImageView.swift */; };
-		631B4528295B7BF6005BED7F /* TitleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B4527295B7BF6005BED7F /* TitleLabelView.swift */; };
-		631B452A295B8175005BED7F /* SubTitleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B4529295B8175005BED7F /* SubTitleLabelView.swift */; };
-		631B452C295B8580005BED7F /* StatusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B452B295B8580005BED7F /* StatusButtonView.swift */; };
+		631B4528295B7BF6005BED7F /* FullNameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B4527295B7BF6005BED7F /* FullNameLabel.swift */; };
+		631B452A295B8175005BED7F /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B4529295B8175005BED7F /* StatusLabel.swift */; };
+		631B452C295B8580005BED7F /* SetStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631B452B295B8580005BED7F /* SetStatusButton.swift */; };
 		6348FE022958D31100801DCE /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6348FE012958D31100801DCE /* ProfileHeaderView.swift */; };
 		63F1BD7C2952DC9D00E78844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1BD7B2952DC9D00E78844 /* AppDelegate.swift */; };
 		63F1BD7E2952DC9D00E78844 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1BD7D2952DC9D00E78844 /* SceneDelegate.swift */; };
@@ -26,9 +26,9 @@
 
 /* Begin PBXFileReference section */
 		631B4525295B7814005BED7F /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
-		631B4527295B7BF6005BED7F /* TitleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabelView.swift; sourceTree = "<group>"; };
-		631B4529295B8175005BED7F /* SubTitleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleLabelView.swift; sourceTree = "<group>"; };
-		631B452B295B8580005BED7F /* StatusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButtonView.swift; sourceTree = "<group>"; };
+		631B4527295B7BF6005BED7F /* FullNameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullNameLabel.swift; sourceTree = "<group>"; };
+		631B4529295B8175005BED7F /* StatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
+		631B452B295B8580005BED7F /* SetStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStatusButton.swift; sourceTree = "<group>"; };
 		6348FE012958D31100801DCE /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		63F1BD782952DC9D00E78844 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F1BD7B2952DC9D00E78844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,9 +61,9 @@
 				63F1BD912952EF4700E78844 /* ProfileViewController.swift */,
 				6348FE012958D31100801DCE /* ProfileHeaderView.swift */,
 				631B4525295B7814005BED7F /* AvatarImageView.swift */,
-				631B4527295B7BF6005BED7F /* TitleLabelView.swift */,
-				631B4529295B8175005BED7F /* SubTitleLabelView.swift */,
-				631B452B295B8580005BED7F /* StatusButtonView.swift */,
+				631B4527295B7BF6005BED7F /* FullNameLabel.swift */,
+				631B4529295B8175005BED7F /* StatusLabel.swift */,
+				631B452B295B8580005BED7F /* SetStatusButton.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -176,13 +176,13 @@
 				631B4526295B7814005BED7F /* AvatarImageView.swift in Sources */,
 				63F1BD802952DC9D00E78844 /* ViewController.swift in Sources */,
 				63F1BD7C2952DC9D00E78844 /* AppDelegate.swift in Sources */,
-				631B4528295B7BF6005BED7F /* TitleLabelView.swift in Sources */,
+				631B4528295B7BF6005BED7F /* FullNameLabel.swift in Sources */,
 				63F1BD962953124D00E78844 /* PostModel.swift in Sources */,
-				631B452C295B8580005BED7F /* StatusButtonView.swift in Sources */,
+				631B452C295B8580005BED7F /* SetStatusButton.swift in Sources */,
 				6348FE022958D31100801DCE /* ProfileHeaderView.swift in Sources */,
 				63F1BD922952EF4700E78844 /* ProfileViewController.swift in Sources */,
 				63F1BD902952EF1000E78844 /* FeedViewController.swift in Sources */,
-				631B452A295B8175005BED7F /* SubTitleLabelView.swift in Sources */,
+				631B452A295B8175005BED7F /* StatusLabel.swift in Sources */,
 				63F1BD982953153900E78844 /* InfoViewController.swift in Sources */,
 				63F1BD7E2952DC9D00E78844 /* SceneDelegate.swift in Sources */,
 			);

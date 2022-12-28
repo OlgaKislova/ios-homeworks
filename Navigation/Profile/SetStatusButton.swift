@@ -1,13 +1,13 @@
 //
-//  StatusButtonView.swift
+//  SetStatusButton.swift
 //  Navigation
 //
-//  Created by Kislov Vadim on 27.12.2022.
+//  Created by Kislova Olga on 27.12.2022.
 //
 
 import UIKit
 
-class StatusButtonView: UIButton {
+class SetStatusButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
     

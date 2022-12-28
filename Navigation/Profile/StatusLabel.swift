@@ -1,13 +1,13 @@
 //
-//  SubTitleLabelView.swift
+//  StatusLabel.swift
 //  Navigation
 //
-//  Created by Kislov Vadim on 27.12.2022.
+//  Created by Kislova Olga on 27.12.2022.
 //
 
 import UIKit
 
-class SubTitleLabelView: UILabel {
+class StatusLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
     
