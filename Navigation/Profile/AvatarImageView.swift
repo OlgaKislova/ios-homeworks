@@ -16,6 +16,8 @@ class AvatarImageView: UIImageView {
         self.layer.borderColor = UIColor.white.cgColor
         self.clipsToBounds = true
         
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         self.image = UIImage(named: "orange-cat")
     }
     

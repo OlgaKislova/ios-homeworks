@@ -17,15 +17,12 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = .lightGray
         self.navigationController?.navigationBar.backgroundColor = .white
         
-        setScrollAppearance()
+        headerView.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(headerView)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        headerView.frame = self.view.frame
         
-        headerView.recalculationPosition()
+        setScrollAppearance()
+        setConstraints()
     }
     
     private func setScrollAppearance() {
@@ -33,5 +30,14 @@ class ProfileViewController: UIViewController {
         appearance.backgroundColor = .white
         
         self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            headerView.heightAnchor.constraint(equalToConstant: 220),
+            headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        ])
     }
 }

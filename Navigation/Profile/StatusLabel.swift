@@ -14,6 +14,8 @@ class StatusLabel: UILabel {
         self.font = UIFont(name: "Rockwell-Regular", size: 14)
         self.textColor = .gray
         self.text = "Waiting for the holidays..."
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {

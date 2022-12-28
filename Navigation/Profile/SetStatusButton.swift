@@ -20,6 +20,8 @@ class SetStatusButton: UIButton {
         self.layer.shadowOffset = CGSize(width: 4, height: 4)
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.7
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {

@@ -14,6 +14,8 @@ class FullNameLabel: UILabel {
         self.font = UIFont(name: "Rockwell-Bold", size: 18)
         self.textColor = .black
         self.text = "Just a tired cat"
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {
