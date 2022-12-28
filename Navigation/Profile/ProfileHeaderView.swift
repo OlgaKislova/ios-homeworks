@@ -8,48 +8,48 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    private let avatarIView = AvatarImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    private let titleLView = FullNameLabel(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
-    private let subTitleLView = StatusLabel(frame: CGRect(x: 0, y: 0, width: 180, height: 18))
-    private let statusButtonView = SetStatusButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+    private let avatarImageView = AvatarImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    private let fullNameLabel = FullNameLabel()
+    private let statusLabel = StatusLabel()
+    private let setStatusButton = StatusButton()
     
     override func willMove(toSuperview newSuperview: UIView?) {
-        self.addSubview(avatarIView)
-        self.addSubview(titleLView)
-        self.addSubview(subTitleLView)
-        self.addSubview(statusButtonView)
+        self.addSubview(avatarImageView)
+        self.addSubview(fullNameLabel)
+        self.addSubview(statusLabel)
+        self.addSubview(setStatusButton)
+        
+        setStatusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
         
         setConstraints()
     }
     
     @objc
     func showStatus() {
-        print(self.subTitleLView.text ?? "")
+        print(self.statusLabel.text ?? "")
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            avatarIView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            avatarIView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            avatarIView.widthAnchor.constraint(equalToConstant: 100),
-            avatarIView.heightAnchor.constraint(equalToConstant: 100),
+            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            titleLView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            titleLView.leadingAnchor.constraint(equalTo: avatarIView.trailingAnchor, constant: 16),
-            titleLView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            titleLView.heightAnchor.constraint(equalToConstant: 18),
+            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            fullNameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            fullNameLabel.heightAnchor.constraint(equalToConstant: 18),
             
-            subTitleLView.topAnchor.constraint(equalTo: avatarIView.bottomAnchor, constant: -36),
-            subTitleLView.leadingAnchor.constraint(equalTo: avatarIView.trailingAnchor, constant: 10),
-            subTitleLView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            subTitleLView.heightAnchor.constraint(equalToConstant: 18),
+            statusLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -36),
+            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 10),
+            statusLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            statusLabel.heightAnchor.constraint(equalToConstant: 18),
             
-            statusButtonView.topAnchor.constraint(equalTo: avatarIView.bottomAnchor, constant: 16),
-            statusButtonView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            statusButtonView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            statusButtonView.heightAnchor.constraint(equalToConstant: 50)
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
-        statusButtonView.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
     }
 }
