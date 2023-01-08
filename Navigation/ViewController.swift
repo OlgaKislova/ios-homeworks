@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Navigation
 //
-//  Created by Kislov Vadim on 21.12.2022.
+//  Created by Kislova Olga on 21.12.2022.
 //
 
 import UIKit
@@ -13,7 +13,5 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
 }
 
