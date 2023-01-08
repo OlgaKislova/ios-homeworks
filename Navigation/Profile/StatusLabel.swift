@@ -8,8 +8,8 @@
 import UIKit
 
 class StatusLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
     
         self.font = UIFont(name: "Rockwell-Regular", size: 14)
         self.textColor = .gray

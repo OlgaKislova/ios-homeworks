@@ -8,8 +8,8 @@
 import UIKit
 
 class FullNameLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
     
         self.font = UIFont(name: "Rockwell-Bold", size: 18)
         self.textColor = .black

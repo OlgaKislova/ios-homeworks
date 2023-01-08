@@ -8,12 +8,14 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    private let avatarImageView = AvatarImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    private let avatarImageView = AvatarImageView()
     private let fullNameLabel = FullNameLabel()
     private let statusLabel = StatusLabel()
     private let setStatusButton = StatusButton()
     
-    override func willMove(toSuperview newSuperview: UIView?) {
+    init() {
+        super.init(frame: .zero)
+        
         self.addSubview(avatarImageView)
         self.addSubview(fullNameLabel)
         self.addSubview(statusLabel)
@@ -22,6 +24,10 @@ class ProfileHeaderView: UIView {
         setStatusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
         
         setConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     @objc

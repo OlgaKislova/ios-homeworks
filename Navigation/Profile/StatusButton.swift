@@ -8,8 +8,8 @@
 import UIKit
 
 class StatusButton: UIButton {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
     
         self.setTitle("Show status", for: .normal)
         self.setTitleColor(.white, for: .normal)
