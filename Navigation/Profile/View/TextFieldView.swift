@@ -14,6 +14,7 @@ class TextFieldView: UITextField {
         self.placeholder = placeholder
         self.font = .systemFont(ofSize: 16)
         self.textColor = .black
+        self.tintColor = UIColor(named: "AccentColor")
         self.autocapitalizationType = .none
         self.isSecureTextEntry = isSecureTextEntry
         self.clearButtonMode = .whileEditing
