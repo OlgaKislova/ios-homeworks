@@ -11,6 +11,7 @@ class LogInViewController: UIViewController {
     private let logoImageView = LogoImageView()
     private let loginTextField = TextFieldView(isSecureTextEntry: false, placeholder: "Email or phone")
     private let passwordTextField = TextFieldView(isSecureTextEntry: true, placeholder: "Password")
+    private let loginButton = LoginButton()
     private let fieldStackView = FieldStackView()
     private let dividerView = DividerView()
 
@@ -27,6 +28,7 @@ class LogInViewController: UIViewController {
         fieldStackView.addArrangedSubview(passwordTextField)
         
         self.view.addSubview(fieldStackView)
+        self.view.addSubview(loginButton)
         
         setConstraints()
     }
@@ -43,7 +45,12 @@ class LogInViewController: UIViewController {
             fieldStackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
             fieldStackView.heightAnchor.constraint(equalToConstant: 100),
             
-            dividerView.heightAnchor.constraint(equalToConstant: 0.5)
+            dividerView.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            loginButton.topAnchor.constraint(equalTo: fieldStackView.bottomAnchor, constant: 16),
+            loginButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            loginButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            loginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

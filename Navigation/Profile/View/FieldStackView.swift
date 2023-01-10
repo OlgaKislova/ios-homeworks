@@ -13,7 +13,7 @@ class FieldStackView: UIStackView {
     init() {
         super.init(frame: .zero)
 
-        self.backgroundColor = .systemGray5
+        self.backgroundColor = .systemGray6
         self.axis = .vertical
         self.spacing = 0
         self.alignment = .fill
