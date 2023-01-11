@@ -129,15 +129,14 @@ class LogInViewController: UIViewController {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
             logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -154,7 +153,8 @@ class LogInViewController: UIViewController {
             loginButton.topAnchor.constraint(equalTo: fieldStackView.bottomAnchor, constant: 16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
+            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 }
