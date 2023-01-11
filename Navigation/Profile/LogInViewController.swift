@@ -8,15 +8,75 @@
 import UIKit
 
 class LogInViewController: UIViewController {
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    
-    private let logoImageView = LogoImageView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
+
+    private let contentView: UIView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "logo")
+        
+        return imageView
+    }()
+
     private let loginTextField = TextFieldView(isSecureTextEntry: false, placeholder: "Email or phone")
     private let passwordTextField = TextFieldView(isSecureTextEntry: true, placeholder: "Password")
-    private let loginButton = LoginButton()
-    private let fieldStackView = FieldStackView()
-    private let dividerView = DividerView()
+
+    private let loginButton: UIButton = {
+        let button = UIButton()
+        
+        button.setTitle("Log in", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setBackgroundImage(UIImage(named: "blue_pixel.png"), for: .normal)
+        button.clipsToBounds = true
+        
+        button.layer.cornerRadius = 10
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+
+    private let fieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.backgroundColor = .systemGray6
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.cornerRadius = 10
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+
+    private let dividerView: UIView = {
+        let divider = UIView()
+        
+        divider.backgroundColor = .lightGray
+        
+        return divider
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +87,7 @@ class LogInViewController: UIViewController {
         addSubviews()
         setConstraints()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -46,9 +106,6 @@ class LogInViewController: UIViewController {
     }
     
     private func addSubviews() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(logoImageView)
