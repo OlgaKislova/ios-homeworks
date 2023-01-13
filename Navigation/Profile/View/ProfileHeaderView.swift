@@ -8,10 +8,61 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    private let avatarImageView = AvatarImageView()
-    private let fullNameLabel = FullNameLabel()
-    private let statusLabel = StatusLabel()
-    private let setStatusButton = StatusButton()
+    private let avatarImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.clipsToBounds = true
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.image = UIImage(named: "orange-cat")
+        
+        return imageView
+    }()
+    
+    private let fullNameLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = UIFont(name: "Rockwell-Bold", size: 18)
+        label.textColor = .black
+        label.text = "Just a tired cat"
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private let statusLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = UIFont(name: "Rockwell-Regular", size: 14)
+        label.textColor = .gray
+        label.text = "Waiting for the holidays..."
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private let setStatusButton: UIButton = {
+        let button = UIButton()
+        
+        button.setTitle("Show status", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        
+        button.layer.cornerRadius = 4
+        button.layer.shadowRadius = 4
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -28,6 +79,12 @@ class ProfileHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        avatarImageView.layer.cornerRadius = CGFloat(avatarImageView.frame.width / 2)
     }
     
     @objc

@@ -9,7 +9,24 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     private let headerView = ProfileHeaderView()
-    private let showAlertButton = StatusButton()
+    
+    private let showAlertButton: UIButton = {
+        let button = UIButton()
+        
+        button.setTitle("Show message", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        
+        button.layer.cornerRadius = 0
+        button.layer.shadowRadius = 4
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +37,6 @@ class ProfileViewController: UIViewController {
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         
-        showAlertButton.setTitle("Show message", for: .normal)
-        showAlertButton.layer.cornerRadius = 0
         showAlertButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         
         self.view.addSubview(headerView)
