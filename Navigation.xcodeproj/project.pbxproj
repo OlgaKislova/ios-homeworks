@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6317D8CE2971D7F300BF7598 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317D8CD2971D7F300BF7598 /* PostModel.swift */; };
+		6317D8D12971E9A800BF7598 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317D8D02971E9A800BF7598 /* PostTableViewCell.swift */; };
+		6317D8D32971F92600BF7598 /* InformationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317D8D22971F92600BF7598 /* InformationLabelView.swift */; };
 		6348FE022958D31100801DCE /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6348FE012958D31100801DCE /* ProfileHeaderView.swift */; };
 		634D781C296AEE1000DBF9B7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634D781B296AEE1000DBF9B7 /* LogInViewController.swift */; };
 		634D7823296AF90600DBF9B7 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634D7822296AF90600DBF9B7 /* TextFieldView.swift */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		6317D8CD2971D7F300BF7598 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		6317D8D02971E9A800BF7598 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		6317D8D22971F92600BF7598 /* InformationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationLabelView.swift; sourceTree = "<group>"; };
 		6348FE012958D31100801DCE /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		634D781B296AEE1000DBF9B7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		634D7822296AF90600DBF9B7 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 			children = (
 				6348FE012958D31100801DCE /* ProfileHeaderView.swift */,
 				634D7822296AF90600DBF9B7 /* TextFieldView.swift */,
+				6317D8D02971E9A800BF7598 /* PostTableViewCell.swift */,
+				6317D8D22971F92600BF7598 /* InformationLabelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,6 +193,8 @@
 			files = (
 				63F1BD942952F0C600E78844 /* PostViewController.swift in Sources */,
 				6317D8CE2971D7F300BF7598 /* PostModel.swift in Sources */,
+				6317D8D32971F92600BF7598 /* InformationLabelView.swift in Sources */,
+				6317D8D12971E9A800BF7598 /* PostTableViewCell.swift in Sources */,
 				63F1BD802952DC9D00E78844 /* ViewController.swift in Sources */,
 				634D7823296AF90600DBF9B7 /* TextFieldView.swift in Sources */,
 				63F1BD7C2952DC9D00E78844 /* AppDelegate.swift in Sources */,
