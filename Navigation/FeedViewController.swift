@@ -26,7 +26,7 @@ class FeedViewController: UIViewController {
     
     @objc
     func postButtonAction() {
-        let post = Post(title: "Новый год", message: "С праздником чудес и исполнения желаний – с Новым годом!")
+        let post = Publication(title: "Новый год", message: "С праздником чудес и исполнения желаний – с Новым годом!")
         let vc = PostViewController()
         
         vc.post = post

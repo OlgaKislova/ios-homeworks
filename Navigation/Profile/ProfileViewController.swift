@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
     
     @objc
     func showAlert() {
-        let post = Post(title: "Новый год", message: "С праздником чудес и исполнения желаний – с Новым годом!")
+        let post = Publication(title: "Новый год", message: "С праздником чудес и исполнения желаний – с Новым годом!")
         
         let alert = UIAlertController(title: post.title, message: post.message, preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "Ok", style: .default)
