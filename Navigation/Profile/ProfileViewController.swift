@@ -8,54 +8,30 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    private let headerView = ProfileHeaderView()
-    
-    private let showAlertButton: UIButton = {
-        let button = UIButton()
+    private let tableView: UITableView = {
+        let tableView = UITableView()
         
-        button.setTitle("Show message", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        button.layer.cornerRadius = 0
-        button.layer.shadowRadius = 4
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
+        return tableView
     }()
+    
+    private let posts = Post.getPostsAboutCats()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Профиль"
-        self.view.backgroundColor = .lightGray
+        self.view.backgroundColor = .white
         self.navigationController?.navigationBar.backgroundColor = .white
         
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tableView)
         
-        showAlertButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
-        
-        self.view.addSubview(headerView)
-        self.view.addSubview(showAlertButton)
+        tableView.delegate = self
+        tableView.dataSource = self
         
         setScrollAppearance()
         setConstraints()
-    }
-    
-    @objc
-    func showAlert() {
-        let post = Publication(title: "Новый год", message: "С праздником чудес и исполнения желаний – с Новым годом!")
-        
-        let alert = UIAlertController(title: post.title, message: post.message, preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Ok", style: .default)
-
-        alert.addAction(doneAction)
-        
-        present(alert, animated: true)
     }
     
     private func setScrollAppearance() {
@@ -67,15 +43,28 @@ class ProfileViewController: UIViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-            headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            headerView.bottomAnchor.constraint(equalTo: self.showAlertButton.topAnchor, constant: 0),
-            
-            showAlertButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            showAlertButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-            showAlertButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            showAlertButton.heightAnchor.constraint(equalToConstant: 50)
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        ProfileHeaderView()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
