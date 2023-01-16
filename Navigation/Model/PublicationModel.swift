@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post {
+struct Publication {
     let title: String
     let message: String
 }
