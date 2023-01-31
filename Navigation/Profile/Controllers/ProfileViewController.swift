@@ -8,17 +8,20 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    private let posts = Post.getPostsAboutCats()
+    private let photos = Photo.getPhotos()
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
         
         return tableView
     }()
-    
-    private let posts = Post.getPostsAboutCats()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,23 +57,46 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-        
-        cell.configure(post: posts[indexPath.row])
-    
-        return cell
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        posts.count
+        section == 0 ? 1 : posts.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        ProfileHeaderView()
+        section == 0 ? ProfileHeaderView() : nil
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
+            
+            let photosForCell = photos.count < 4 ? photos : Array(photos[0...3])
+            
+            cell.configure(photos: photosForCell)
+        
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+            
+            cell.configure(post: posts[indexPath.row])
+        
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            let newViewController = PhotosViewController()
+            
+            newViewController.title = "Photo Gallery"
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            navigationController?.pushViewController(newViewController, animated: true)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }

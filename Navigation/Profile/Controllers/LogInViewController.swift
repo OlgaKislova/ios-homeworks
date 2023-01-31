@@ -139,6 +139,9 @@ class LogInViewController: UIViewController {
             showLoginFailedAlert()
         } else {
             self.navigationController?.pushViewController(ProfileViewController(), animated: false)
+            
+            loginTextField.text = ""
+            passwordTextField.text = ""
         }
     }
     
