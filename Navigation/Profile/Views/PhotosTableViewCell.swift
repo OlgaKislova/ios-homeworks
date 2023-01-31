@@ -110,7 +110,7 @@ class PhotosTableViewCell: UITableViewCell {
     private func getPhotoView() -> UIImageView {
         let photo = UIImageView()
         
-        photo.contentMode = .scaleAspectFit
+        photo.contentMode = .scaleAspectFill
         photo.layer.cornerRadius = 6
         photo.clipsToBounds = true
         

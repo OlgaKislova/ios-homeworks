@@ -11,6 +11,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
         
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 10
         image.layer.masksToBounds = true
         image.clipsToBounds = true

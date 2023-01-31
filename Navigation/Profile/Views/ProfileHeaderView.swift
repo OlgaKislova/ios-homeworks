@@ -100,8 +100,6 @@ class ProfileHeaderView: UIView {
     }
     
     private func addSubviews() {
-        self.backgroundColor = .lightGray
-        
         statusTextField.delegate = self
         setStatusButton.addTarget(self, action: #selector(setStatus), for: .touchUpInside)
         

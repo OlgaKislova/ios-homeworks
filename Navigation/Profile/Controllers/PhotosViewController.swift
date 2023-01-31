@@ -24,6 +24,32 @@ class PhotosViewController: UIViewController {
         
         return collectionView
     }()
+    
+    private lazy var backgroundView: UIView = {
+        let view = UIView()
+        
+        view.backgroundColor = .black
+        view.isUserInteractionEnabled = false
+        view.alpha = 0
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var fullImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .black
+        imageView.isUserInteractionEnabled = true
+        imageView.alpha = 0
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return imageView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +57,14 @@ class PhotosViewController: UIViewController {
         photosCV.delegate = self
         photosCV.dataSource = self
         
-        view.addSubview(photosCV)
-
+        setViews()
         setConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        photosCV.layoutIfNeeded()
         setAppearance()
     }
     
@@ -48,13 +74,28 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    private func setViews() {
+        view.addSubview(photosCV)
+        view.addSubview(backgroundView)
+        view.addSubview(fullImageView)
+    }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
             photosCV.topAnchor.constraint(equalTo: view.topAnchor),
             photosCV.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             photosCV.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            photosCV.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            photosCV.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            fullImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fullImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            fullImageView.heightAnchor.constraint(equalTo: fullImageView.widthAnchor),
         ])
     }
     
@@ -66,6 +107,46 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.isHidden = false
+    }
+    /// Show image
+    /// @return - id image
+    private func showFullScreenImage() {
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                            self.backgroundView.alpha = 0.8
+                            self.fullImageView.alpha = 1
+                            self.photosCV.isScrollEnabled = false
+                            self.photosCV.isUserInteractionEnabled = false
+                        },
+                       completion: { _ in
+                            UIView.animate(withDuration: 0.3) { [self] in
+                                let closeBarItem = UIBarButtonItem(image: UIImage(systemName: "multiply.circle"),
+                                                                   style: .plain,
+                                                                   target: self,
+                                                                   action: #selector(self.hideFullScreenImage)
+                                )
+                
+                                navigationItem.rightBarButtonItem = closeBarItem
+                                self.photosCV.layoutIfNeeded()
+                            }
+        })
+    }
+    
+    @objc
+    private func hideFullScreenImage() {
+        UIView.animate(withDuration: 0.3,
+                       animations:  { self.navigationItem.rightBarButtonItem = .none },
+                       completion: { _ in
+                            UIView.animate(withDuration: 0.5, delay: 0.0) {
+                                self.backgroundView.alpha = 0
+                                self.fullImageView.alpha = 0
+                                self.fullImageView.isUserInteractionEnabled = true
+                       
+                                self.photosCV.isScrollEnabled = true
+                                self.photosCV.isUserInteractionEnabled = true
+                                self.photosCV.layoutIfNeeded()
+                            }
+        })
     }
 }
 
@@ -99,5 +180,11 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: indent, left: indent, bottom: indent, right: indent)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        fullImageView.image = UIImage(named: photos[indexPath.item].name)
+        
+        showFullScreenImage()
     }
 }
