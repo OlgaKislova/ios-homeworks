@@ -49,7 +49,7 @@ class ProfileHeaderView: UIView {
     private let setStatusButton: UIButton = {
         let button = UIButton()
         
-        button.setTitle("Show status", for: .normal)
+        button.setTitle("Set status", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         
@@ -64,23 +64,54 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
+    private var statusTextField: UITextField = {
+        let statusTextField = UITextField()
+        
+        statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        statusTextField.textColor = .black
+        statusTextField.backgroundColor = .white
+        statusTextField.placeholder = "Enter new status"
+        statusTextField.layer.borderWidth = 1
+        statusTextField.layer.borderColor = UIColor.black.cgColor
+        statusTextField.layer.cornerRadius = 12
+        statusTextField.clearButtonMode = .whileEditing
+        
+        statusTextField.autocorrectionType = .no
+        statusTextField.returnKeyType = .done
+        statusTextField.enablesReturnKeyAutomatically = true
+        
+        statusTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        statusTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: statusTextField.frame.height))
+        statusTextField.leftViewMode = .always
+        
+        return statusTextField
+    }()
+    
     init() {
         super.init(frame: .zero)
         
-        self.backgroundColor = .lightGray
-        
-        self.addSubview(avatarImageView)
-        self.addSubview(fullNameLabel)
-        self.addSubview(statusLabel)
-        self.addSubview(setStatusButton)
-        
-        setStatusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
-        
+        addSubviews()
         setConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    private func addSubviews() {
+        self.backgroundColor = .lightGray
+        
+        statusTextField.delegate = self
+        setStatusButton.addTarget(self, action: #selector(setStatus), for: .touchUpInside)
+        
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        
+        self.addSubview(avatarImageView)
+        self.addSubview(fullNameLabel)
+        self.addSubview(statusLabel)
+        self.addSubview(statusTextField)
+        self.addSubview(setStatusButton)
     }
     
     override func layoutSubviews() {
@@ -90,8 +121,17 @@ class ProfileHeaderView: UIView {
     }
     
     @objc
-    func showStatus() {
-        print(self.statusLabel.text ?? "")
+    func setStatus() {
+        let statusText = statusTextField.text ?? ""
+        
+        if statusText.isEmpty {
+            shakeAnimation(for: statusTextField)
+        } else {
+            statusLabel.text = statusText
+            statusTextField.text = ""
+        }
+        
+        dismissKeyboard()
     }
     
     private func setConstraints() {
@@ -111,11 +151,42 @@ class ProfileHeaderView: UIView {
             statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             statusLabel.heightAnchor.constraint(equalToConstant: 18),
             
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 12),
+            statusTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 10),
+            statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
         ])
+    }
+    
+    private func shakeAnimation(for textField: UITextField) {
+        let animation = CABasicAnimation(keyPath: "position")
+        
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.duration = 0.05
+
+        animation.fromValue = CGPoint(x: textField.center.x - 3, y: textField.center.y)
+        animation.toValue = CGPoint(x: textField.center.x + 3, y: textField.center.y)
+        
+        textField.layer.add(animation, forKey: "position")
+    }
+}
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        setStatus()
+        
+        return true
+    }
+    
+    @objc
+    func dismissKeyboard() {
+        self.endEditing(true)
     }
 }
