@@ -1,5 +1,5 @@
 //
-//  PostsService.swift
+//  PostService.swift
 //  Navigation
 //
 //  Created by Kislova Olga on 01.02.2023.
@@ -7,8 +7,14 @@
 
 import Foundation
 
-class PostsService {
-    static var shared = PostsService()
+protocol PostServiceDelegate {
+    func changeCountOfLikes(for index: Int)
+    
+    func changeCountOfViews(for index: Int)
+}
+
+class PostService {
+    static var shared = PostService()
     
     var posts = [
         Post(
@@ -48,8 +54,6 @@ class PostsService {
     }
     
     public func changeCountOfViews(for index: Int) {
-        var post = posts[index]
-        
-        post.views += 1
+        posts[index].views += 1
     }
 }

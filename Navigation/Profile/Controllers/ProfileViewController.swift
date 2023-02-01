@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    private var posts = PostsService.shared.posts
+    private var posts = PostService.shared.posts
     private let photos = Photo.getPhotos()
     
     private let tableView: UITableView = {
@@ -82,7 +82,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
             
             cell.selectionStyle = .none
-            cell.configure(post: posts[indexPath.row], index: indexPath.row, delegate: self)
+            cell.postServiceDelegate = self
+            cell.delegate = self
+            cell.configure(post: posts[indexPath.row], index: indexPath.row)
         
             return cell
         }
@@ -90,31 +92,43 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let newViewController = PhotosViewController()
+            let photosVC = PhotosViewController()
             
-            newViewController.title = "Photo Gallery"
+            photosVC.title = "Photo Gallery"
             
-            navigationController?.pushViewController(newViewController, animated: true)
+            navigationController?.pushViewController(photosVC, animated: true)
         }
     }
 }
 
-extension ProfileViewController: PostTableViewCellDelegate {
+extension ProfileViewController: PostServiceDelegate {
     func changeCountOfLikes(for index: Int) {
-        PostsService.shared.changeCountOfLikes(for: index)
+        PostService.shared.changeCountOfLikes(for: index)
         
-        posts = PostsService.shared.posts
+        posts = PostService.shared.posts
         
         tableView.reloadData()
     }
     
-    func showPostView(for index: Int) {
-        PostsService.shared.changeCountOfViews(for: index)
+    func changeCountOfViews(for index: Int) {
+        PostService.shared.changeCountOfViews(for: index)
         
-        posts = PostsService.shared.posts
-        
-        var post = posts[index]
+        posts = PostService.shared.posts
         
         tableView.reloadData()
+    }
+}
+
+extension ProfileViewController: PostTableViewCellDelegate {
+    func showPostView(for index: Int) {
+        changeCountOfViews(for: index)
+        
+        let detailedPostVC = DetailedPostViewController()
+        
+        detailedPostVC.post = posts[index]
+        detailedPostVC.indexCell = index
+        detailedPostVC.postServiceDelegate = self
+        
+        navigationController?.pushViewController(detailedPostVC, animated: true)
     }
 }

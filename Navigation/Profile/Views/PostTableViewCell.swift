@@ -8,13 +8,12 @@
 import UIKit
 
 protocol PostTableViewCellDelegate {
-    func changeCountOfLikes(for index: Int)
-    
     func showPostView(for index: Int)
 }
 
 class PostTableViewCell: UITableViewCell {
     public var delegate: PostTableViewCellDelegate!
+    public var postServiceDelegate: PostServiceDelegate!
     public var indexCell: Int!
     
     private let authorLabel: UILabel = {
@@ -77,9 +76,8 @@ class PostTableViewCell: UITableViewCell {
         super.init(coder: coder)
     }
     
-    public func configure(post: Post, index: Int, delegate: PostTableViewCellDelegate) {
+    public func configure(post: Post, index: Int) {
         indexCell = index
-        self.delegate = delegate
         authorLabel.text = post.author
         imagePostView.image = UIImage(named: post.image)
         descriptionLabel.text = post.description
@@ -113,8 +111,8 @@ class PostTableViewCell: UITableViewCell {
             authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             imagePostView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
-            imagePostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            imagePostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            imagePostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imagePostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imagePostView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
             imagePostView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
@@ -125,13 +123,13 @@ class PostTableViewCell: UITableViewCell {
             labelViewStack.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             labelViewStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             labelViewStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            labelViewStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            labelViewStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
     
     @objc
     private func changeCountOfLike() {
-        delegate.changeCountOfLikes(for: indexCell)
+        postServiceDelegate.changeCountOfLikes(for: indexCell)
     }
     
     @objc

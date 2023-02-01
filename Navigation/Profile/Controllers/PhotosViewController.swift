@@ -57,7 +57,7 @@ class PhotosViewController: UIViewController {
         photosCV.delegate = self
         photosCV.dataSource = self
         
-        setViews()
+        setSubviews()
         setConstraints()
     }
     
@@ -74,7 +74,7 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    private func setViews() {
+    private func setSubviews() {
         view.addSubview(photosCV)
         view.addSubview(backgroundView)
         view.addSubview(fullImageView)
@@ -95,7 +95,7 @@ class PhotosViewController: UIViewController {
             fullImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fullImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            fullImageView.heightAnchor.constraint(equalTo: fullImageView.widthAnchor),
+            fullImageView.heightAnchor.constraint(equalTo: fullImageView.widthAnchor)
         ])
     }
     
@@ -108,8 +108,7 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.isHidden = false
     }
-    /// Show image
-    /// @return - id image
+
     private func showFullScreenImage() {
         UIView.animate(withDuration: 0.5,
                        animations: {
