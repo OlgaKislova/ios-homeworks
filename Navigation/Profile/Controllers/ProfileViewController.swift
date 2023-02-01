@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    private let posts = Post.getPostsAboutCats()
+    private var posts = PostsService.shared.posts
     private let photos = Photo.getPhotos()
     
     private let tableView: UITableView = {
@@ -74,14 +74,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
             
             let photosForCell = photos.count < 4 ? photos : Array(photos[0...3])
-            
+            cell.selectionStyle = .none
             cell.configure(photos: photosForCell)
         
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
             
-            cell.configure(post: posts[indexPath.row])
+            cell.selectionStyle = .none
+            cell.configure(post: posts[indexPath.row], index: indexPath.row, delegate: self)
         
             return cell
         }
@@ -92,11 +93,28 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let newViewController = PhotosViewController()
             
             newViewController.title = "Photo Gallery"
-            tableView.deselectRow(at: indexPath, animated: true)
             
             navigationController?.pushViewController(newViewController, animated: true)
-        } else {
-            tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+}
+
+extension ProfileViewController: PostTableViewCellDelegate {
+    func changeCountOfLikes(for index: Int) {
+        PostsService.shared.changeCountOfLikes(for: index)
+        
+        posts = PostsService.shared.posts
+        
+        tableView.reloadData()
+    }
+    
+    func showPostView(for index: Int) {
+        PostsService.shared.changeCountOfViews(for: index)
+        
+        posts = PostsService.shared.posts
+        
+        var post = posts[index]
+        
+        tableView.reloadData()
     }
 }
