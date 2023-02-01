@@ -8,6 +8,10 @@
 import UIKit
 
 class LogInViewController: UIViewController {
+    private let minCountSymbolsOfPassword = 4
+    private let defaultLogin = "admin"
+    private let defaultPassword = "password"
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -77,6 +81,25 @@ class LogInViewController: UIViewController {
         
         return divider
     }()
+    
+    private lazy var passwordErrorLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.text = "Минимальное количество символов - \(self.minCountSymbolsOfPassword)"
+        label.textColor = .red
+        label.isHidden = true
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private lazy var passwordBlock: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +125,24 @@ class LogInViewController: UIViewController {
     
     @objc
     func clickLoginButton() {
-        self.navigationController?.pushViewController(ProfileViewController(), animated: false)
+        let login = loginTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        
+        if login.isEmpty && password.isEmpty {
+            shakeAnimation(for: loginTextField)
+            shakeAnimation(for: passwordTextField)
+        } else if login.isEmpty {
+            shakeAnimation(for: loginTextField)
+        } else if password.isEmpty || password.count < minCountSymbolsOfPassword {
+            shakeAnimation(for: passwordTextField)
+        } else if login != defaultLogin || password != defaultPassword {
+            showLoginFailedAlert()
+        } else {
+            self.navigationController?.pushViewController(ProfileViewController(), animated: false)
+            
+            loginTextField.text = ""
+            passwordTextField.text = ""
+        }
     }
     
     private func addSubviews() {
@@ -111,14 +151,20 @@ class LogInViewController: UIViewController {
         contentView.addSubview(logoImageView)
         contentView.addSubview(fieldStackView)
         
+        passwordBlock.addSubview(passwordTextField)
+        passwordBlock.addSubview(passwordErrorLabel)
+        
         fieldStackView.addArrangedSubview(loginTextField)
         fieldStackView.addArrangedSubview(dividerView)
-        fieldStackView.addArrangedSubview(passwordTextField)
+        fieldStackView.addArrangedSubview(passwordBlock)
         
         contentView.addSubview(loginButton)
         
         loginTextField.delegate = self
         passwordTextField.delegate = self
+        
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         loginButton.addTarget(self, action: #selector(clickLoginButton), for: .touchUpInside)
         
@@ -146,9 +192,18 @@ class LogInViewController: UIViewController {
             fieldStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             fieldStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             fieldStackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
-            fieldStackView.heightAnchor.constraint(equalToConstant: 100),
+            fieldStackView.heightAnchor.constraint(equalToConstant: 120),
             
             dividerView.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            passwordTextField.topAnchor.constraint(equalTo: passwordBlock.topAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: passwordBlock.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: passwordBlock.trailingAnchor),
+            passwordTextField.bottomAnchor.constraint(equalTo: passwordBlock.bottomAnchor),
+            
+            passwordErrorLabel.leadingAnchor.constraint(equalTo: passwordBlock.leadingAnchor, constant: 10),
+            passwordErrorLabel.trailingAnchor.constraint(equalTo: passwordBlock.trailingAnchor, constant: -10),
+            passwordErrorLabel.bottomAnchor.constraint(equalTo: passwordBlock.bottomAnchor, constant: -4),
             
             loginButton.topAnchor.constraint(equalTo: fieldStackView.bottomAnchor, constant: 16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -156,6 +211,37 @@ class LogInViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
+    }
+    
+    private func shakeAnimation(for textField: UITextField) {
+        let animation = CABasicAnimation(keyPath: "position")
+        
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.duration = 0.05
+
+        animation.fromValue = CGPoint(x: textField.center.x - 3, y: textField.center.y)
+        animation.toValue = CGPoint(x: textField.center.x + 3, y: textField.center.y)
+        
+        textField.layer.add(animation, forKey: "position")
+    }
+    
+    private func showLoginFailedAlert() {
+        let alert = UIAlertController(title: "Ошибка", message: "Вы ввели неверный логин или пароль", preferredStyle: .alert)
+    
+        let doneAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+
+        alert.addAction(doneAction)
+        present(alert, animated: true)
+    }
+    
+    @objc
+    private func textFieldDidChange(_ textField: UITextField) {
+        if textField == passwordTextField {
+            let count = (textField.text ?? "").count
+            
+            passwordErrorLabel.isHidden = (count == 0 || count >= minCountSymbolsOfPassword)
+        }
     }
 }
 
